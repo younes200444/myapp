@@ -8,9 +8,16 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/younes200444/myapp.git'
             }
         }
+
+        stage('Build Docker Images') {
+            steps {
+                sh 'docker compose build'
+            }
+        }
+
         stage('Deploy Application') {
             steps {
-                sh 'docker compose up '
+                sh 'docker compose up -d'
             }
         }
     }
